@@ -1,8 +1,26 @@
+import { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Authprovider/AuthProvider";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+    const { user, logout } = use(AuthContext);
+     const handlelogout = () => {
+    logout()
+      .then(() => {
+        Swal.fire({
+                      title: "Loged-Out",
+                      text: "Logout Successfully",
+                      icon: "success",
+                    });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   // 🔥 TEMP USER (later replace with real auth)
-  const user = null; // change to {} to test logged-in UI
+  // const user = null; // change to {} to test logged-in UI
 
   const navLinks = (
     <>
@@ -65,7 +83,7 @@ const Navbar = () => {
               >
                 <li><Link to="/dashboard">Dashboard</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
-                <li><button>Logout</button></li>
+                <li><button onClick={handlelogout}>Logout</button></li>
               </ul>
             </div>
           ) : (
