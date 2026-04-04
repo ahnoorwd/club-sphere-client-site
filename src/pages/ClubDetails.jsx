@@ -1,9 +1,15 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { use } from "react";
+import { AuthContext } from "../Authprovider/AuthProvider";
+import Swal from "sweetalert2";
+import { checkMembership, createMembership } from "../api/memberships";
 
 const ClubDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = use(AuthContext);
 
   const { data: club, isLoading, isError } = useQuery({
     queryKey: ["clubDetails", id],
@@ -12,6 +18,66 @@ const ClubDetails = () => {
       return res.data;
     },
   });
+
+  const handleJoinClub = async () => {
+    // 1. user not logged in
+    if (!user) {
+      Swal.fire({
+        icon: "warning",
+        title: "Login Required",
+        text: "Please login first to join this club.",
+      });
+      navigate("/login");
+      return;
+    }
+
+    // 2. paid club -> later payment flow
+    if (club.membershipFee > 0) {
+      Swal.fire({
+        icon: "info",
+        title: "Paid Membership",
+        text: "This club requires payment. Stripe payment will be added later.",
+      });
+      return;
+    }
+
+    try {
+      // 3. check if already joined
+      const existing = await checkMembership(user.email, club._id);
+
+      if (existing.joined) {
+        Swal.fire({
+          icon: "info",
+          title: "Already Joined",
+          text: "You already joined this club.",
+        });
+        return;
+      }
+
+      // 4. create membership
+      const membershipData = {
+        userEmail: user.email,
+        clubId: club._id,
+        clubName: club.clubName,
+      };
+
+      const result = await createMembership(membershipData);
+
+      if (result.insertedId || result.acknowledged) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "You joined this club successfully!",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "Something went wrong while joining the club.",
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -92,7 +158,10 @@ const ClubDetails = () => {
                   </p>
                 </div>
 
-                <button className="btn btn-primary w-full mt-6 rounded-full">
+                <button
+                  onClick={handleJoinClub}
+                  className="btn btn-primary w-full mt-6 rounded-full"
+                >
                   Join Club
                 </button>
               </div>
@@ -106,7 +175,7 @@ const ClubDetails = () => {
             </div>
 
             <div className="mt-8">
-              <Link to="/" className="btn btn-outline rounded-full px-6">
+              <Link to="/clubs" className="btn btn-outline rounded-full px-6">
                 Back to Clubs
               </Link>
             </div>

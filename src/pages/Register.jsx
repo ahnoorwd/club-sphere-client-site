@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Authprovider/AuthProvider";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { saveUserToDB } from "../api/users";
 
 const Register = () => {
   const { createUser, user, setuser, updateUser, signinwithgoogle } =
@@ -12,8 +13,13 @@ const Register = () => {
 
   const handlegoogleregister = () => {
     signinwithgoogle()
-      .then((result) => {
-        // console.log(result.user);
+      .then(async (result) => {
+        await saveUserToDB({
+          name: result.user?.displayName || "Google User",
+          email: result.user?.email,
+          photoURL: result.user?.photoURL || "",
+        });
+
         toast.success("Registered successfully with Google!");
         setuser(result.user);
         navigate("/");
@@ -31,7 +37,6 @@ const Register = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log({name,photo,email,password});
 
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])[A-Za-z\d!@#$%^&*()_\-+=<>?{}[\]~]{6,}$/;
@@ -40,30 +45,41 @@ const Register = () => {
       Swal.fire({
         icon: "error",
         title: "Checks again please",
-        text: "Plese type atleast one uppercase lowercase and special character",
-        footer: '<a href="/login">Why do I have this issue? try login</a>',
+        text: "Please type at least one uppercase, one lowercase, and one special character",
+        footer: '<a href="/login">Why do I have this issue? Try login</a>',
       });
-      return; // stop the function here if invalid
+      return;
     }
 
     createUser(email, password)
-      .then((result) => {
-        //console.log(result.user);
-        updateUser({ displayName: name, photoURL: photo })
-          .then(() => {
-            setuser({ ...user, displayName: name, photoURL: photo });
-            Swal.fire({
-              title: "Congrates You !!!",
-              text: "Register Successfull",
-              icon: "success",
-            });
-            navigate("/");
-            e.target.reset();
-          })
-          .catch((error) => {
-            setuser(user);
-            toast.error(error);
+      .then(async (result) => {
+        try {
+          await updateUser({ displayName: name, photoURL: photo });
+
+          await saveUserToDB({
+            name: name,
+            email: email,
+            photoURL: photo,
           });
+
+          setuser({
+            ...result.user,
+            displayName: name,
+            photoURL: photo,
+          });
+
+          Swal.fire({
+            title: "Congrats You !!!",
+            text: "Register Successful",
+            icon: "success",
+          });
+
+          navigate("/");
+          form.reset();
+        } catch (error) {
+          setuser(user);
+          toast.error(error.message);
+        }
       })
       .catch((error) => {
         toast.error(error.message);
@@ -74,7 +90,6 @@ const Register = () => {
     <section className="min-h-screen flex items-center justify-center bg-gradient-to from-indigo-500 via-purple-500 to-pink-500 py-10 px-5">
       <title>Game-Hub-Register</title>
       <div className="w-full max-w-5xl flex flex-col lg:flex-row overflow-hidden rounded-3xl shadow-2xl border border-white/20 bg-white">
-        {/* Left Side */}
         <div className="flex-1 bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 text-white p-10 flex flex-col justify-center relative">
           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-l-3xl"></div>
           <div className="relative z-10">
@@ -91,14 +106,12 @@ const Register = () => {
           </div>
         </div>
 
-        {/* Right Side (Form Card) */}
         <div className="flex-1 bg-white p-8 lg:p-10">
           <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
             Register Here First
           </h2>
 
           <form onSubmit={handleRegister} className="space-y-4">
-            {/* Name */}
             <div>
               <label className="block text-gray-700 font-medium mb-1">
                 Full Name
@@ -111,6 +124,7 @@ const Register = () => {
                 required
               />
             </div>
+
             <div>
               <label className="block text-gray-700 font-medium mb-1">
                 Photo-URL
@@ -124,7 +138,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Email */}
             <div>
               <label className="block text-gray-700 font-medium mb-1">
                 Email
@@ -138,7 +151,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Password */}
             <div className="relative">
               <label className="block text-gray-700 font-medium mb-1">
                 Password
@@ -153,7 +165,6 @@ const Register = () => {
               <div className="absolute right-4 top-10 cursor-pointer text-gray-600 hover:text-indigo-500 z-10"></div>
             </div>
 
-            {/* Confirm Password */}
             <div>
               <label className="block text-gray-700 font-medium mb-1">
                 Confirm Password
@@ -165,7 +176,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Terms */}
             <div className="flex items-center gap-2">
               <input
                 type="checkbox"
@@ -183,7 +193,6 @@ const Register = () => {
               </p>
             </div>
 
-            {/* Register Button */}
             <button
               type="submit"
               className="btn w-full bg-gradient-to-r from-indigo-600 to-pink-500 text-white font-semibold border-0 hover:from-indigo-700 hover:to-pink-600 rounded-lg shadow-md mt-2"
@@ -193,7 +202,6 @@ const Register = () => {
 
             <div className="divider text-gray-400">or</div>
 
-            {/* Google Register */}
             <button
               type="button"
               onClick={handlegoogleregister}
@@ -204,7 +212,6 @@ const Register = () => {
             </button>
           </form>
 
-          {/* Footer Link */}
           <p className="text-center text-sm mt-6 text-gray-600">
             Already have an account?{" "}
             <Link
