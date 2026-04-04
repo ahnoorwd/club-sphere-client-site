@@ -2,33 +2,41 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router";
 
-const FeaturedClubs = () => {
-  const { data: clubs = [], isLoading } = useQuery({
-    queryKey: ["featuredClubs"],
+const Clubs = () => {
+  const { data: clubs = [], isLoading, isError } = useQuery({
+    queryKey: ["allClubs"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/clubs/featured");
+      const res = await axios.get("http://localhost:5000/clubs");
       return res.data;
     },
   });
 
   if (isLoading) {
     return (
-      <div className="py-16 text-center">
+      <div className="min-h-screen flex justify-center items-center">
         <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
   }
 
+  if (isError) {
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center text-center px-4">
+        <h2 className="text-3xl font-bold mb-4">Failed to load clubs</h2>
+        <p className="text-base-content/70">Please try again later.</p>
+      </div>
+    );
+  }
+
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-base-100">
+    <section className="py-14 px-4 sm:px-6 lg:px-8 bg-base-100 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-base-content">
-            Featured Clubs
-          </h2>
+          <h1 className="text-3xl md:text-5xl font-bold text-base-content">
+            All Clubs
+          </h1>
           <p className="mt-4 text-base md:text-lg text-base-content/70 max-w-2xl mx-auto">
-            Explore popular communities, connect with like-minded people, and
-            find the perfect club for your interests.
+            Browse all available clubs and find the one that matches your passion.
           </p>
         </div>
 
@@ -42,7 +50,7 @@ const FeaturedClubs = () => {
                 <img
                   src={club.bannerImage}
                   alt={club.clubName}
-                  className="h-52 sm:h-56 md:h-60 w-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="h-56 w-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
 
                 <div className="absolute top-4 left-4">
@@ -54,11 +62,11 @@ const FeaturedClubs = () => {
 
               <div className="p-5 md:p-6 flex flex-col flex-grow">
                 <div className="flex-grow">
-                  <h3 className="text-xl font-bold text-base-content mb-2 line-clamp-1">
+                  <h2 className="text-xl font-bold text-base-content mb-2 line-clamp-1">
                     {club.clubName}
-                  </h3>
+                  </h2>
 
-                  <p className="text-sm text-base-content/70 mb-3 line-clamp-2">
+                  <p className="text-sm text-base-content/70 mb-4 line-clamp-3">
                     {club.description}
                   </p>
 
@@ -67,12 +75,10 @@ const FeaturedClubs = () => {
                       <span className="font-semibold">Location:</span>{" "}
                       {club.location}
                     </p>
-
                     <p>
                       <span className="font-semibold">Manager:</span>{" "}
                       {club.managerEmail}
                     </p>
-
                     <p>
                       <span className="font-semibold">Status:</span>{" "}
                       <span className="capitalize text-success font-medium">
@@ -82,13 +88,11 @@ const FeaturedClubs = () => {
                   </div>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-base-300 flex items-center justify-between gap-3">
+                <div className="mt-5 pt-4 border-t border-base-300 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-base-content/60">Membership Fee</p>
                     <p className="text-lg font-extrabold text-primary">
-                      {club.membershipFee === 0
-                        ? "Free"
-                        : `$${club.membershipFee}`}
+                      {club.membershipFee === 0 ? "Free" : `$${club.membershipFee}`}
                     </p>
                   </div>
 
@@ -104,15 +108,17 @@ const FeaturedClubs = () => {
           ))}
         </div>
 
-        {/* Show More Button */}
-        <div className="text-center mt-12">
-          <Link to="/clubs" className="btn btn-outline btn-primary rounded-full px-8">
-            Show More Clubs
-          </Link>
-        </div>
+        {clubs.length === 0 && (
+          <div className="text-center py-16">
+            <h3 className="text-2xl font-semibold mb-2">No clubs found</h3>
+            <p className="text-base-content/70">
+              There are no clubs available right now.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
 };
 
-export default FeaturedClubs;
+export default Clubs;

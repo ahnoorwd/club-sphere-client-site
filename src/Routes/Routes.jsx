@@ -4,6 +4,8 @@ import Layout from "../Layout/Layout";
 import Home from "../pages/Home";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import ClubDetails from "../pages/ClubDetails";
+import Clubs from "../pages/Clubs";
 
 export const router = createBrowserRouter([
   {
@@ -12,17 +14,24 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
-       },
+        element: <Home></Home>,
+      },
       {
         path: "/register",
-        element: <Register></Register>
-       },
+        element: <Register></Register>,
+      },
       {
         path: "/login",
-        element: <Login></Login>
-       },
-      
+        element: <Login></Login>,
+      },
+      {
+        path: "/clubs",
+        element: <Clubs></Clubs>,
+      },
+      {
+        path: "/clubs/:id",
+        element: <ClubDetails></ClubDetails>,
+      },
     ],
   },
 ]);
