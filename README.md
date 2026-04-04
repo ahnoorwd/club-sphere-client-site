@@ -1,16 +1,84 @@
-# React + Vite
+# 🌐 ClubSphere – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **ClubSphere**, a modern web platform where users can explore, join, and engage with different local clubs.  
+This frontend application is built with React and provides a smooth, responsive, and user-friendly experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Website
 
-## React Compiler
+🔗 **[View Live Site](#)** *(Add your deployed link here later)*
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🎯 Project Purpose
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ClubSphere helps users:
+- Discover clubs based on their interests  
+- View detailed club information  
+- Join clubs easily  
+- Become part of a growing community  
+
+---
+
+## ✨ Key Features
+
+### 🔹 Public Features
+- 🏠 Modern Home page with Hero Section  
+- ⭐ Featured clubs (latest approved clubs)  
+- 📚 All clubs page (dynamic data from MongoDB)  
+- 🔍 Club details page  
+
+### 🔹 Authentication
+- 🔐 Email & Password login/register (Firebase)  
+- 🔑 Google Sign-in  
+- 👤 User data stored in MongoDB  
+
+### 🔹 Club Interaction
+- ✅ Join club functionality (free clubs)  
+- 🚫 Prevent duplicate joining  
+- 🔄 Login required before joining  
+
+### 🔹 UI/UX
+- 🎨 Fully responsive design  
+- 🌟 Modern card layout  
+- 🔥 Hero slider section  
+- 🔔 Toast notifications & alerts  
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+- ⚛️ React  
+- 🔀 React Router  
+- 📡 TanStack Query  
+- 🌐 Axios  
+
+### Styling
+- 🎨 Tailwind CSS  
+- 💎 DaisyUI  
+
+### Authentication
+- 🔐 Firebase  
+
+### UI Libraries
+- 🔔 React Toastify  
+- ⚡ SweetAlert2  
+- 🎯 React Icons  
+
+---
+
+## 📦 NPM Packages
+
+```bash
+react
+react-router
+@tanstack/react-query
+axios
+firebase
+react-toastify
+sweetalert2
+react-icons
+tailwindcss
+daisyui
