@@ -21,127 +21,135 @@ const Navbar = () => {
       });
   };
 
-  // ✅ Active link style
   const navStyle = ({ isActive }) =>
-    isActive
-      ? "text-primary font-semibold border-b-2 border-primary pb-1"
-      : "hover:text-primary transition duration-300";
+    isActive ? "nav-link nav-link-active" : "nav-link";
 
   const navLinks = (
     <>
-      <li><NavLink to="/" className={navStyle}>Home</NavLink></li>
-      <li><NavLink to="/clubs" className={navStyle}>Clubs</NavLink></li>
-      <li><NavLink to="/events" className={navStyle}>Events</NavLink></li>
-      <li><NavLink to="/how-it-works" className={navStyle}>How It Works</NavLink></li>
+      <li>
+        <NavLink to="/" className={navStyle}>
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/clubs" className={navStyle}>
+          Clubs
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/events" className={navStyle}>
+          Events
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/how-it-works" className={navStyle}>
+          How It Works
+        </NavLink>
+      </li>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100/80 backdrop-blur-md shadow-md px-4 sticky top-0 z-50">
+    <header className="navbar-wrapper sticky top-0 z-50">
+      <div className="navbar custom-navbar">
+        {/* LEFT */}
+        <div className="navbar-start">
+          {/* Mobile Menu */}
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="mobile-menu-btn lg:hidden">
+              ☰
+            </div>
 
-      {/* LEFT */}
-      <div className="navbar-start">
-
-        {/* Mobile Menu */}
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            ☰
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content navbar-dropdown mt-3 w-56 p-3 z-50"
+            >
+              {navLinks}
+            </ul>
           </div>
 
-          <ul className="menu menu-sm dropdown-content bg-base-100 rounded-xl mt-3 w-52 p-3 shadow-lg z-50">
-            {navLinks}
-          </ul>
+          {/* Logo */}
+          <Link to="/" className="navbar-logo">
+            ClubSphere
+          </Link>
         </div>
 
-        {/* Logo */}
-        <Link to="/" className="text-2xl font-extrabold text-primary tracking-wide">
-          ClubSphere
-        </Link>
-      </div>
+        {/* CENTER */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal navbar-menu">{navLinks}</ul>
+        </div>
 
-      {/* CENTER */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-6 text-base font-medium">
-          {navLinks}
-        </ul>
-      </div>
+        {/* RIGHT */}
+        <div className="navbar-end gap-3">
+          {user ? (
+            <div className="dropdown dropdown-end">
+              {/* Avatar + Name */}
+              <div
+                tabIndex={0}
+                role="button"
+                className="user-trigger"
+              >
+                <div className="avatar user-avatar-ring">
+                  <div className="w-10 rounded-full overflow-hidden">
+                    <img
+                      src={user?.photoURL || "https://i.ibb.co/2kR5zqM/user.png"}
+                      alt="user"
+                    />
+                  </div>
+                </div>
 
-      {/* RIGHT */}
-      <div className="navbar-end gap-3">
-
-        {user ? (
-          // ✅ LOGGED IN UI
-          <div className="dropdown dropdown-end">
-            
-            {/* Avatar + Name */}
-            <div
-              tabIndex={0}
-              role="button"
-              className="flex items-center gap-2 cursor-pointer hover:bg-base-200 px-2 py-1 rounded-full transition"
-            >
-              <div className="avatar ring ring-primary ring-offset-base-100 ring-offset-2 rounded-full">
-                <div className="w-10 rounded-full">
-                  <img
-                    src={user?.photoURL || "https://i.ibb.co/2kR5zqM/user.png"}
-                    alt="user"
-                  />
+                <div className="hidden md:block text-left">
+                  <p className="user-name">
+                    {user?.displayName || "User"}
+                  </p>
+                  <p className="user-email">
+                    {user?.email}
+                  </p>
                 </div>
               </div>
 
-              {/* Show name/email on large screen */}
-              <div className="hidden md:block text-left">
-                <p className="text-sm font-semibold leading-tight">
-                  {user?.displayName || "User"}
-                </p>
-                <p className="text-xs text-base-content/60 leading-tight">
-                  {user?.email}
-                </p>
-              </div>
+              {/* Dropdown Menu */}
+              <ul className="menu menu-sm dropdown-content user-dropdown mt-4 w-64 p-3 z-50">
+                <div className="user-dropdown-info">
+                  <p className="font-semibold text-base">
+                    {user?.displayName || "User"}
+                  </p>
+                  <p className="text-sm text-slate-500 break-all">
+                    {user?.email}
+                  </p>
+                </div>
+
+                <li>
+                  <Link to="/dashboard" className="dropdown-link">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/profile" className="dropdown-link">
+                    Profile
+                  </Link>
+                </li>
+
+                <li className="mt-2">
+                  <button onClick={handlelogout} className="logout-btn">
+                    Logout
+                  </button>
+                </li>
+              </ul>
             </div>
-
-            {/* Dropdown Menu */}
-            <ul className="menu menu-sm dropdown-content mt-4 w-64 p-3 shadow-xl bg-base-100 rounded-xl z-50">
-
-              {/* USER INFO */}
-              <div className="px-2 py-2 border-b border-base-300 mb-2">
-                <p className="font-semibold text-base">
-                  {user?.displayName || "User"}
-                </p>
-                <p className="text-sm text-base-content/70">
-                  {user?.email}
-                </p>
-              </div>
-
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-
-              <li className="mt-2">
-                <button
-                  onClick={handlelogout}
-                  className="text-error hover:bg-error hover:text-white rounded-lg"
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          // 🔴 LOGGED OUT UI
-          <>
-            <Link to="/login" className="btn btn-ghost hover:text-primary">
-              Login
-            </Link>
-            <Link to="/register" className="btn btn-primary rounded-full px-6">
-              Register
-            </Link>
-          </>
-        )}
+          ) : (
+            <>
+              <Link to="/login" className="login-btn-nav">
+                Login
+              </Link>
+              <Link to="/register" className="register-btn-nav">
+                Register
+              </Link>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 
