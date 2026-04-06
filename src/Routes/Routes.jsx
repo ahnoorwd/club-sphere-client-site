@@ -6,6 +6,8 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import ClubDetails from "../pages/ClubDetails";
 import Clubs from "../pages/Clubs";
+import PaymentPage from "../pages/PaymentPage";
+import MyClubs from "../pages/dashboard/MyClubs";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +33,15 @@ export const router = createBrowserRouter([
       {
         path: "/clubs/:id",
         element: <ClubDetails></ClubDetails>,
+      },
+      {
+        path: "/payment/:id",
+        element: <PaymentPage></PaymentPage>,
+      },
+
+      {
+        path: "/dashboard/my-clubs",
+        element: <MyClubs></MyClubs>,
       },
     ],
   },

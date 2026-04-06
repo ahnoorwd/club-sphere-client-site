@@ -56,7 +56,11 @@ const Navbar = () => {
         <div className="navbar-start">
           {/* Mobile Menu */}
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="mobile-menu-btn lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="mobile-menu-btn lg:hidden"
+            >
               ☰
             </div>
 
@@ -84,27 +88,21 @@ const Navbar = () => {
           {user ? (
             <div className="dropdown dropdown-end">
               {/* Avatar + Name */}
-              <div
-                tabIndex={0}
-                role="button"
-                className="user-trigger"
-              >
+              <div tabIndex={0} role="button" className="user-trigger">
                 <div className="avatar user-avatar-ring">
                   <div className="w-10 rounded-full overflow-hidden">
                     <img
-                      src={user?.photoURL || "https://i.ibb.co/2kR5zqM/user.png"}
+                      src={
+                        user?.photoURL || "https://i.ibb.co/2kR5zqM/user.png"
+                      }
                       alt="user"
                     />
                   </div>
                 </div>
 
                 <div className="hidden md:block text-left">
-                  <p className="user-name">
-                    {user?.displayName || "User"}
-                  </p>
-                  <p className="user-email">
-                    {user?.email}
-                  </p>
+                  <p className="user-name">{user?.displayName || "User"}</p>
+                  <p className="user-email">{user?.email}</p>
                 </div>
               </div>
 
@@ -120,10 +118,16 @@ const Navbar = () => {
                 </div>
 
                 <li>
+                  <Link to="/dashboard/my-clubs" className="dropdown-link">
+                    My Clubs
+                  </Link>
+                </li>
+                <li>
                   <Link to="/dashboard" className="dropdown-link">
                     Dashboard
                   </Link>
                 </li>
+
                 <li>
                   <Link to="/profile" className="dropdown-link">
                     Profile

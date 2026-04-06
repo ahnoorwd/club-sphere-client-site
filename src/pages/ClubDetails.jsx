@@ -32,14 +32,10 @@ const ClubDetails = () => {
     }
 
     // 2. paid club -> later payment flow
-    if (club.membershipFee > 0) {
-      Swal.fire({
-        icon: "info",
-        title: "Paid Membership",
-        text: "This club requires payment. Stripe payment will be added later.",
-      });
-      return;
-    }
+   if (club.membershipFee > 0) {
+  navigate(`/payment/${club._id}`);
+  return;
+}
 
     try {
       // 3. check if already joined

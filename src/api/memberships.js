@@ -14,3 +14,8 @@ export const createMembership = async (membershipInfo) => {
   );
   return res.data;
 };
+
+export const getUserMemberships = async (email) => {
+  const res = await axios.get(`http://localhost:5000/memberships/user/${email}`);
+  return res.data;
+};
