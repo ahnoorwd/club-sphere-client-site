@@ -11,3 +11,8 @@ export const savePayment = async (paymentInfo) => {
   const res = await axios.post("http://localhost:5000/payments", paymentInfo);
   return res.data;
 };
+
+export const getUserPayments = async (email) => {
+  const res = await axios.get(`http://localhost:5000/payments/user/${email}`);
+  return res.data;
+};

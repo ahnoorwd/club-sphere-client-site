@@ -122,6 +122,16 @@ const Navbar = () => {
                     My Clubs
                   </Link>
                 </li>
+
+                <li>
+                  <Link
+                    to="/dashboard/payment-history"
+                    className="dropdown-link"
+                  >
+                    Payment History
+                  </Link>
+                </li>
+
                 <li>
                   <Link to="/dashboard" className="dropdown-link">
                     Dashboard
