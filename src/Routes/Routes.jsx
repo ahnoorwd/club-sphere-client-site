@@ -12,6 +12,8 @@ import PaymentHistory from "../pages/dashboard/PaymentHistory";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import DashboardHome from "../pages/dashboard/DashboardHome";
+import AddClub from "../pages/dashboard/AddClub";
+import ManageClubs from "../pages/dashboard/ManageClubs";
 
 export const router = createBrowserRouter([
   {
@@ -43,28 +45,36 @@ export const router = createBrowserRouter([
         element: <PaymentPage></PaymentPage>,
       },
 
-     {
-  path: "/dashboard",
-  element: (
-    <PrivateRoute>
-      <DashboardLayout></DashboardLayout>
-    </PrivateRoute>
-  ),
-  children: [
-    {
-      path: "",
-      element: <DashboardHome></DashboardHome>,
-    },
-    {
-      path: "my-clubs",
-      element: <MyClubs></MyClubs>,
-    },
-    {
-      path: "payment-history",
-      element: <PaymentHistory></PaymentHistory>,
-    },
-  ],
-},
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: "",
+            element: <DashboardHome></DashboardHome>,
+          },
+          {
+            path: "my-clubs",
+            element: <MyClubs></MyClubs>,
+          },
+          {
+            path: "payment-history",
+            element: <PaymentHistory></PaymentHistory>,
+          },
+          {
+            path: "add-club",
+            element: <AddClub></AddClub>,
+          },
+          {
+            path: "manage-clubs",
+            element: <ManageClubs></ManageClubs>,
+          },
+        ],
+      },
     ],
   },
 ]);
