@@ -9,6 +9,9 @@ import Clubs from "../pages/Clubs";
 import PaymentPage from "../pages/PaymentPage";
 import MyClubs from "../pages/dashboard/MyClubs";
 import PaymentHistory from "../pages/dashboard/PaymentHistory";
+import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../Layout/DashboardLayout";
+import DashboardHome from "../pages/dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -40,14 +43,28 @@ export const router = createBrowserRouter([
         element: <PaymentPage></PaymentPage>,
       },
 
-      {
-        path: "/dashboard/my-clubs",
-        element: <MyClubs></MyClubs>,
-      },
-      {
-        path: "/dashboard/payment-history",
-        element: <PaymentHistory></PaymentHistory>,
-      },
+     {
+  path: "/dashboard",
+  element: (
+    <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>
+  ),
+  children: [
+    {
+      path: "",
+      element: <DashboardHome></DashboardHome>,
+    },
+    {
+      path: "my-clubs",
+      element: <MyClubs></MyClubs>,
+    },
+    {
+      path: "payment-history",
+      element: <PaymentHistory></PaymentHistory>,
+    },
+  ],
+},
     ],
   },
 ]);

@@ -117,26 +117,10 @@ const Navbar = () => {
                   </p>
                 </div>
 
-                <li>
-                  <Link to="/dashboard/my-clubs" className="dropdown-link">
-                    My Clubs
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/dashboard/payment-history"
-                    className="dropdown-link"
-                  >
-                    Payment History
-                  </Link>
-                </li>
-
-                <li>
-                  <Link to="/dashboard" className="dropdown-link">
-                    Dashboard
-                  </Link>
-                </li>
+                <Link to="/dashboard" className="dropdown-link">
+                  Dashboard
+                </Link>
+                
 
                 <li>
                   <Link to="/profile" className="dropdown-link">
