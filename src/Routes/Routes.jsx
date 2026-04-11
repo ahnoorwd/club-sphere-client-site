@@ -14,6 +14,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import DashboardHome from "../pages/dashboard/DashboardHome";
 import AddClub from "../pages/dashboard/AddClub";
 import ManageClubs from "../pages/dashboard/ManageClubs";
+import ManageAllClubs from "../pages/dashboard/ManageAllClubs";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
           {
             path: "manage-clubs",
             element: <ManageClubs></ManageClubs>,
+          },
+          {
+            path: "manage-all-clubs",
+            element: <ManageAllClubs></ManageAllClubs>,
           },
         ],
       },
