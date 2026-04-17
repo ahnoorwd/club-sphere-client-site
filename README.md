@@ -3,6 +3,8 @@
 Welcome to **ClubSphere**, a modern web platform where users can explore, join, and engage with different local clubs.  
 This frontend application is built with React and provides a smooth, responsive, and user-friendly experience.
 
+This frontend application is built with React and provides a smooth, responsive, and user-friendly experience.
+
 ---
 
 ## 🚀 Live Website
@@ -44,6 +46,11 @@ ClubSphere helps users:
 - 🌟 Modern card layout  
 - 🔥 Hero slider section  
 - 🔔 Toast notifications & alerts  
+
+  Join club functionality (free clubs)  
+- 🚫 Prevent duplicate joining  
+- 🔄 Login required before joining  
+
 
 ---
 
