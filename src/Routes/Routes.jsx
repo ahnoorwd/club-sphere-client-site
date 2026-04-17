@@ -15,6 +15,8 @@ import DashboardHome from "../pages/dashboard/DashboardHome";
 import AddClub from "../pages/dashboard/AddClub";
 import ManageClubs from "../pages/dashboard/ManageClubs";
 import ManageAllClubs from "../pages/dashboard/ManageAllClubs";
+import Events from "../pages/Events";
+import EventDetails from "../pages/EventDetails";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ export const router = createBrowserRouter([
       {
         path: "/clubs/:id",
         element: <ClubDetails></ClubDetails>,
+      },
+      {
+        path: "/events",
+        element: <Events></Events>,
+      },
+      {
+        path: "/events/:id",
+        element: <EventDetails></EventDetails>,
       },
       {
         path: "/payment/:id",
