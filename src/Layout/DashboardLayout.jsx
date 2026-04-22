@@ -31,7 +31,11 @@ const DashboardLayout = () => {
   return (
     <div className="min-h-screen bg-slate-100">
       <div className="drawer lg:drawer-open">
-        <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
+        <input
+          id="dashboard-drawer"
+          type="checkbox"
+          className="drawer-toggle"
+        />
 
         {/* Main content */}
         <div className="drawer-content flex flex-col">
@@ -100,7 +104,10 @@ const DashboardLayout = () => {
                     <span>My Clubs</span>
                   </NavLink>
 
-                  <NavLink to="/dashboard/payment-history" className={linkClass}>
+                  <NavLink
+                    to="/dashboard/payment-history"
+                    className={linkClass}
+                  >
                     <FaMoneyBillWave className="text-lg" />
                     <span>Payment History</span>
                   </NavLink>
@@ -119,6 +126,11 @@ const DashboardLayout = () => {
                     <FaClipboardList className="text-lg" />
                     <span>Manage Clubs</span>
                   </NavLink>
+
+                  <NavLink to="/dashboard/create-event" className={linkClass}>
+                    <FaPlusCircle className="text-lg" />
+                    <span>Create Event</span>
+                  </NavLink>
                 </>
               )}
 
@@ -130,7 +142,10 @@ const DashboardLayout = () => {
                     <span>Manage Users</span>
                   </NavLink>
 
-                  <NavLink to="/dashboard/manage-all-clubs" className={linkClass}>
+                  <NavLink
+                    to="/dashboard/manage-all-clubs"
+                    className={linkClass}
+                  >
                     <FaClipboardList className="text-lg" />
                     <span>Manage Clubs</span>
                   </NavLink>
