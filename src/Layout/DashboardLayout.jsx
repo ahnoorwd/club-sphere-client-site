@@ -104,6 +104,11 @@ const DashboardLayout = () => {
                     <span>My Clubs</span>
                   </NavLink>
 
+                  <NavLink to="/dashboard/my-events" className={linkClass}>
+                    <FaClipboardList className="text-lg" />
+                    <span>My Events</span>
+                  </NavLink>
+
                   <NavLink
                     to="/dashboard/payment-history"
                     className={linkClass}
@@ -130,6 +135,10 @@ const DashboardLayout = () => {
                   <NavLink to="/dashboard/create-event" className={linkClass}>
                     <FaPlusCircle className="text-lg" />
                     <span>Create Event</span>
+                  </NavLink>
+                  <NavLink to="/dashboard/manage-events" className={linkClass}>
+                    <FaClipboardList className="text-lg" />
+                    <span>Manage Events</span>
                   </NavLink>
                 </>
               )}

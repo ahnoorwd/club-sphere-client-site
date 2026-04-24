@@ -18,6 +18,10 @@ import ManageAllClubs from "../pages/dashboard/ManageAllClubs";
 import Events from "../pages/Events";
 import EventDetails from "../pages/EventDetails";
 import CreateEvent from "../pages/dashboard/CreateEvent";
+import ManageEvents from "../pages/dashboard/ManageEvents";
+import UpdateEvent from "../pages/dashboard/UpdateEvent";
+import MyEvents from "../pages/dashboard/MyEvents";
+import EventPaymentPage from "../pages/EventPaymentPage";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +56,12 @@ export const router = createBrowserRouter([
         path: "/events/:id",
         element: <EventDetails></EventDetails>,
       },
+
+      {
+        path: "/event-payment/:id",
+        element: <EventPaymentPage></EventPaymentPage>,
+      },
+
       {
         path: "/payment/:id",
         element: <PaymentPage></PaymentPage>,
@@ -74,6 +84,10 @@ export const router = createBrowserRouter([
             element: <MyClubs></MyClubs>,
           },
           {
+            path: "my-events",
+            element: <MyEvents></MyEvents>,
+          },
+          {
             path: "payment-history",
             element: <PaymentHistory></PaymentHistory>,
           },
@@ -92,6 +106,14 @@ export const router = createBrowserRouter([
           {
             path: "create-event",
             element: <CreateEvent></CreateEvent>,
+          },
+          {
+            path: "manage-events",
+            element: <ManageEvents></ManageEvents>,
+          },
+          {
+            path: "update-event/:id",
+            element: <UpdateEvent></UpdateEvent>,
           },
         ],
       },

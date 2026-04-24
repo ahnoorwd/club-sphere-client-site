@@ -29,7 +29,9 @@ const PaymentHistory = () => {
   if (isError) {
     return (
       <div className="min-h-[60vh] flex flex-col justify-center items-center text-center">
-        <h2 className="text-3xl font-bold mb-3">Failed to load payment history</h2>
+        <h2 className="text-3xl font-bold mb-3">
+          Failed to load payment history
+        </h2>
         <p className="text-base-content/70">Please try again later.</p>
       </div>
     );
@@ -50,7 +52,9 @@ const PaymentHistory = () => {
 
         {payments.length === 0 ? (
           <div className="rounded-3xl border border-base-300 bg-white shadow-md p-10 text-center">
-            <h3 className="text-2xl font-bold mb-3">No payment history found</h3>
+            <h3 className="text-2xl font-bold mb-3">
+              No payment history found
+            </h3>
             <p className="text-base-content/70">
               You have not made any membership payments yet.
             </p>
@@ -61,7 +65,7 @@ const PaymentHistory = () => {
               <thead className="bg-base-200 text-slate-700">
                 <tr>
                   <th>#</th>
-                  <th>Club Name</th>
+                  <th>Payment For</th>
                   <th>Amount</th>
                   <th>Type</th>
                   <th>Status</th>
@@ -73,7 +77,9 @@ const PaymentHistory = () => {
                 {payments.map((payment, index) => (
                   <tr key={payment._id} className="hover">
                     <td>{index + 1}</td>
-                    <td className="font-semibold">{payment.clubName}</td>
+                    <td className="font-semibold">
+                      {payment.clubName || payment.eventTitle || "N/A"}
+                    </td>
                     <td className="text-primary font-bold">
                       ${payment.amount}
                     </td>
@@ -86,9 +92,7 @@ const PaymentHistory = () => {
                     <td className="max-w-[200px] truncate">
                       {payment.stripePaymentIntentId}
                     </td>
-                    <td>
-                      {new Date(payment.createdAt).toLocaleDateString()}
-                    </td>
+                    <td>{new Date(payment.createdAt).toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>

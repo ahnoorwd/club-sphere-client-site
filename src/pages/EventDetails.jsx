@@ -1,16 +1,92 @@
-import { useParams, Link } from "react-router";
-import { useQuery } from "@tanstack/react-query";
+import { use } from "react";
+import { useParams, Link, useNavigate } from "react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 import { getEventById } from "../api/events";
+import { AuthContext } from "../Authprovider/AuthProvider";
+import {
+  checkEventRegistration,
+  registerEvent,
+} from "../api/eventRegistrations";
 
 const EventDetails = () => {
   const { id } = useParams();
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const { data: event, isLoading, isError } = useQuery({
+  const {
+    data: event,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["eventDetails", id],
     queryFn: async () => {
       return await getEventById(id);
     },
   });
+
+  const { data: registrationStatus = { registered: false } } = useQuery({
+    queryKey: ["eventRegistrationStatus", user?.email, id],
+    enabled: !!user?.email && !!id,
+    queryFn: async () => {
+      return await checkEventRegistration(user.email, id);
+    },
+  });
+
+  const handleRegisterEvent = async () => {
+    if (!user) {
+      Swal.fire({
+        icon: "warning",
+        title: "Login Required",
+        text: "Please login first to register for this event.",
+      });
+      navigate("/login");
+      return;
+    }
+
+    if (event?.isPaid) {
+      navigate(`/event-payment/${event._id}`);
+      return;
+    }
+
+    const registrationInfo = {
+      eventId: event._id,
+      userEmail: user.email,
+      clubId: event.clubId,
+      status: "registered",
+    };
+
+    try {
+      const result = await registerEvent(registrationInfo);
+
+      if (result.insertedId) {
+        Swal.fire({
+          icon: "success",
+          title: "Registered",
+          text: "You have successfully registered for this event.",
+        });
+
+        queryClient.invalidateQueries([
+          "eventRegistrationStatus",
+          user?.email,
+          id,
+        ]);
+      } else {
+        Swal.fire({
+          icon: "info",
+          title: "Already Registered",
+          text: "You have already registered for this event.",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "Failed to register for event.",
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -38,7 +114,6 @@ const EventDetails = () => {
     <section className="py-14 px-4 sm:px-6 lg:px-8 bg-base-100 min-h-screen">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white border border-base-300 rounded-3xl overflow-hidden shadow-lg">
-          {/* Event Image */}
           <img
             src={event.eventImage}
             alt={event.title}
@@ -92,13 +167,25 @@ const EventDetails = () => {
                 <div>
                   <h3 className="text-2xl font-bold mb-3">Join this event</h3>
                   <p className="text-white/90 leading-7">
-                    This is the event details page. Next we will add the event
-                    registration flow for members.
+                    Register for this event and become part of the ClubSphere
+                    community experience.
                   </p>
                 </div>
 
-                <button className="btn mt-6 rounded-full bg-white text-slate-800 hover:bg-slate-100 border-none">
-                  Registration Coming Next
+                <button
+                  onClick={handleRegisterEvent}
+                  disabled={registrationStatus.registered}
+                  className={`btn mt-6 rounded-full border-none ${
+                    registrationStatus.registered
+                      ? "bg-slate-200 text-slate-500 cursor-not-allowed"
+                      : "bg-white text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  {registrationStatus.registered
+                    ? "Already Registered"
+                    : event.isPaid
+                      ? `Pay & Register $${event.eventFee}`
+                      : "Register Now"}
                 </button>
               </div>
             </div>
