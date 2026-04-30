@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router";
+import { FaChartPie } from "react-icons/fa";
 import useUserRole from "../hooks/useUserRole";
 import {
   FaHome,
@@ -146,6 +147,11 @@ const DashboardLayout = () => {
               {/* Admin links */}
               {role === "admin" && (
                 <>
+                  <NavLink to="/dashboard/analytics" className={linkClass}>
+                    <FaChartPie className="text-lg" />
+                    <span>Analytics</span>
+                  </NavLink>
+
                   <NavLink to="/dashboard/manage-users" className={linkClass}>
                     <FaUsers className="text-lg" />
                     <span>Manage Users</span>

@@ -1,11 +1,13 @@
 import { use } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../Authprovider/AuthProvider";
-import { getUserMemberships } from "../../api/memberships";
+import { getUserMemberships, leaveClub } from "../../api/memberships";
 
 const MyClubs = () => {
   const { user } = use(AuthContext);
+  const queryClient = useQueryClient();
 
   const {
     data: memberships = [],
@@ -19,6 +21,46 @@ const MyClubs = () => {
     },
   });
 
+  const leaveMutation = useMutation({
+    mutationFn: async (membershipId) => {
+      return await leaveClub(membershipId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myMemberships", user?.email]);
+    },
+  });
+
+  const handleLeaveClub = async (membershipId) => {
+    const confirm = await Swal.fire({
+      title: "Leave this club?",
+      text: "You will no longer be a member of this club.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, leave",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    try {
+      const result = await leaveMutation.mutateAsync(membershipId);
+
+      if (result.deletedCount > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Left Club",
+          text: "You have successfully left this club.",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "Could not leave club. Please try again.",
+      });
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-[60vh] flex justify-center items-center">
@@ -31,9 +73,7 @@ const MyClubs = () => {
     return (
       <div className="min-h-[60vh] flex flex-col justify-center items-center text-center">
         <h2 className="text-3xl font-bold mb-3">Failed to load your clubs</h2>
-        <p className="text-base-content/70">
-          Please try again later.
-        </p>
+        <p className="text-base-content/70">Please try again later.</p>
       </div>
     );
   }
@@ -41,13 +81,16 @@ const MyClubs = () => {
   return (
     <section className="py-10 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800">
-            My Clubs
-          </h1>
-          <p className="mt-3 text-slate-500 max-w-2xl">
-            Here are the clubs you have joined. You can review your membership
-            status and quickly go back to the club details page.
+        <div className="mb-10 rounded-3xl bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 p-7 md:p-9 text-white shadow-xl">
+          <p className="uppercase tracking-[0.25em] text-xs font-semibold text-white/80 mb-2">
+            Member Dashboard
+          </p>
+
+          <h1 className="text-3xl md:text-5xl font-extrabold">My Clubs</h1>
+
+          <p className="mt-3 text-white/90 max-w-2xl">
+            Review your joined clubs, open club details, or leave a club when
+            you no longer want to stay connected.
           </p>
         </div>
 
@@ -55,7 +98,8 @@ const MyClubs = () => {
           <div className="rounded-3xl border border-base-300 bg-white shadow-md p-10 text-center">
             <h3 className="text-2xl font-bold mb-3">No joined clubs yet</h3>
             <p className="text-base-content/70 mb-6">
-              You have not joined any club yet. Explore clubs and become part of a community.
+              You have not joined any club yet. Explore clubs and become part of
+              a community.
             </p>
             <Link to="/clubs" className="btn btn-primary rounded-full px-6">
               Browse Clubs
@@ -97,7 +141,7 @@ const MyClubs = () => {
                   )}
                 </div>
 
-                <div className="flex items-center justify-between gap-3 pt-4 border-t border-base-200">
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-base-200">
                   <Link
                     to={`/clubs/${membership.clubId}`}
                     className="btn btn-outline btn-primary rounded-full px-5"
@@ -105,7 +149,13 @@ const MyClubs = () => {
                     View Details
                   </Link>
 
-                  <span className="text-xs text-slate-400">Club Member</span>
+                  <button
+                    onClick={() => handleLeaveClub(membership._id)}
+                    disabled={leaveMutation.isPending}
+                    className="btn btn-error text-white rounded-full px-5"
+                  >
+                    {leaveMutation.isPending ? "Leaving..." : "Leave Club"}
+                  </button>
                 </div>
               </div>
             ))}

@@ -21,3 +21,4 @@ export const getUserRegisteredEvents = async (email) => {
   );
   return res.data;
 };
+

@@ -22,6 +22,9 @@ import ManageEvents from "../pages/dashboard/ManageEvents";
 import UpdateEvent from "../pages/dashboard/UpdateEvent";
 import MyEvents from "../pages/dashboard/MyEvents";
 import EventPaymentPage from "../pages/EventPaymentPage";
+import ManageUsers from "../pages/dashboard/ManageUsers";
+import Profile from "../pages/Profile";
+import AnalyticsDashboard from "../pages/dashboard/AnalyticsDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/profile",
+        element: <Profile></Profile>,
       },
       {
         path: "/clubs",
@@ -104,6 +111,10 @@ export const router = createBrowserRouter([
             element: <ManageAllClubs></ManageAllClubs>,
           },
           {
+            path: "manage-users",
+            element: <ManageUsers></ManageUsers>,
+          },
+          {
             path: "create-event",
             element: <CreateEvent></CreateEvent>,
           },
@@ -114,6 +125,10 @@ export const router = createBrowserRouter([
           {
             path: "update-event/:id",
             element: <UpdateEvent></UpdateEvent>,
+          },
+          {
+            path: "analytics",
+            element: <AnalyticsDashboard></AnalyticsDashboard>,
           },
         ],
       },

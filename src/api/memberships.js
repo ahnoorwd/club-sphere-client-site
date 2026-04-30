@@ -19,3 +19,10 @@ export const getUserMemberships = async (email) => {
   const res = await axios.get(`http://localhost:5000/memberships/user/${email}`);
   return res.data;
 };
+
+export const leaveClub = async (membershipId) => {
+  const res = await axios.delete(
+    `http://localhost:5000/memberships/${membershipId}`
+  );
+  return res.data;
+};

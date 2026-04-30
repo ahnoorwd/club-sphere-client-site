@@ -36,3 +36,10 @@ export const updateEvent = async (id, eventInfo) => {
   const res = await axios.patch(`http://localhost:5000/events/${id}`, eventInfo);
   return res.data;
 };
+
+// 29||04||26
+
+export const getEventCapacity = async (id) => {
+  const res = await axios.get(`http://localhost:5000/events/${id}/capacity`);
+  return res.data;
+};

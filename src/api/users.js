@@ -9,3 +9,15 @@ export const getUserRole = async (email) => {
   const res = await axios.get(`http://localhost:5000/users/role/${email}`);
   return res.data;
 };
+export const getAllUsers = async () => {
+  const res = await axios.get("http://localhost:5000/users");
+  return res.data;
+};
+
+export const updateUserRole = async (id, role) => {
+  const res = await axios.patch(`http://localhost:5000/users/role/${id}`, {
+    role,
+  });
+
+  return res.data;
+};
