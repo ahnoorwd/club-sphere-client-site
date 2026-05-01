@@ -27,6 +27,7 @@ import Profile from "../pages/Profile";
 import AnalyticsDashboard from "../pages/dashboard/AnalyticsDashboard";
 import HowItWorks from "../pages/HowItWorks";
 import AboutUs from "../pages/AboutUs";
+import CommunityLeaders from "../pages/dashboard/CommunityLeaders";
 
 export const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
           {
             path: "my-clubs",
             element: <MyClubs></MyClubs>,
+          },
+          {
+            path: "community-leaders",
+            element: <CommunityLeaders />,
           },
           {
             path: "my-events",

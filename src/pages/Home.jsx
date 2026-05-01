@@ -7,6 +7,7 @@ import Reviews from './Reviews/Reviews';
 import WhyJoinClub from './WhyJoinClub';
 import UpcomingEvents from '../components/home/UpcomingEvents';
 import PlatformStats from './PlatformStats';
+import ClubSphereJourney from './ClubSphereJourney';
 
 const reviewsPromise = fetch('/reviews.json').then(res => res.json());
 
@@ -14,6 +15,7 @@ const Home = () => {
     return (
         <div>
             <HeroSlider />
+            <ClubSphereJourney></ClubSphereJourney>
             <FeaturedClubs></FeaturedClubs>
             <UpcomingEvents />
             <Categories></Categories>

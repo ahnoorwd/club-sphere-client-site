@@ -21,3 +21,8 @@ export const updateUserRole = async (id, role) => {
 
   return res.data;
 };
+
+export const getCommunityLeaders = async () => {
+  const res = await axios.get("http://localhost:5000/community-leaders");
+  return res.data;
+};

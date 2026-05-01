@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router";
-import { FaChartPie } from "react-icons/fa";
+import { FaChartPie, FaUserTie } from "react-icons/fa";
 import useUserRole from "../hooks/useUserRole";
 import {
   FaHome,
@@ -116,6 +116,14 @@ const DashboardLayout = () => {
                   >
                     <FaMoneyBillWave className="text-lg" />
                     <span>Payment History</span>
+                  </NavLink>
+
+                  <NavLink
+                    to="/dashboard/community-leaders"
+                    className={linkClass}
+                  >
+                    <FaUserTie className="text-lg" />
+                    <span>Community Leaders</span>
                   </NavLink>
                 </>
               )}
