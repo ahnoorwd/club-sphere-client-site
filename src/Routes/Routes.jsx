@@ -25,6 +25,8 @@ import EventPaymentPage from "../pages/EventPaymentPage";
 import ManageUsers from "../pages/dashboard/ManageUsers";
 import Profile from "../pages/Profile";
 import AnalyticsDashboard from "../pages/dashboard/AnalyticsDashboard";
+import HowItWorks from "../pages/HowItWorks";
+import AboutUs from "../pages/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/howitworks",
+        element: <HowItWorks></HowItWorks>,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs></AboutUs>,
       },
       {
         path: "/profile",

@@ -232,7 +232,7 @@ const Events = () => {
                         {event.maxAttendees || "Unlimited"}
                       </p>
                       <p>
-                        <span className="font-semibold">Fee:</span>{" "}
+                        <span className="font-semibold">Admition Fee:</span>{" "}
                         <span className="text-primary font-bold">
                           {event.isPaid ? `$${event.eventFee}` : "Free"}
                         </span>

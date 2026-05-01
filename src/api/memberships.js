@@ -26,3 +26,19 @@ export const leaveClub = async (membershipId) => {
   );
   return res.data;
 };
+
+// 30||04||26
+
+export const getUpcomingEvents = async () => {
+  const res = await axios.get("http://localhost:5000/events");
+  
+  // sort upcoming events
+  const events = res.data;
+
+  const upcoming = events
+    .filter((e) => new Date(e.eventDate) > new Date())
+    .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
+    .slice(0, 4); // show only 4
+
+  return upcoming;
+};

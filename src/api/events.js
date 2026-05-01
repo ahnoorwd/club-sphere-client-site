@@ -43,3 +43,16 @@ export const getEventCapacity = async (id) => {
   const res = await axios.get(`http://localhost:5000/events/${id}/capacity`);
   return res.data;
 };
+
+export const getUpcomingEvents = async () => {
+  const res = await axios.get("http://localhost:5000/events");
+  
+  // sort upcoming events
+  const events = res.data;
+
+ const upcoming = events
+  .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
+  .slice(0, 4); // show only 4
+
+  return upcoming;
+};

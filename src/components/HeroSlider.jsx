@@ -1,172 +1,148 @@
 import { Link } from "react-router";
 
+const slides = [
+  {
+    id: "slide1",
+    prev: "slide3",
+    next: "slide2",
+    badge: "Welcome to ClubSphere",
+    title: "Discover Local Clubs & Build Real Connections",
+    text: "Join photography, tech, hiking, book, and social clubs near you. Explore communities, attend events, and grow your network.",
+    image:
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80",
+    primary: "Explore Clubs",
+    primaryLink: "/clubs",
+    secondary: "Join Now",
+    secondaryLink: "/register",
+    stat: "120+ Clubs",
+  },
+  {
+    id: "slide2",
+    prev: "slide1",
+    next: "slide3",
+    badge: "Join Amazing Communities",
+    title: "Meet People Who Share Your Passion",
+    text: "Find your perfect community and grow together with people who share your interests.",
+    image:
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=80",
+    primary: "View Clubs",
+    primaryLink: "/clubs",
+    secondary: "How It Works",
+    secondaryLink: "/how-it-works",
+    stat: "5k+ Members",
+  },
+  {
+    id: "slide3",
+    prev: "slide2",
+    next: "slide1",
+    badge: "Events • Community • Growth",
+    title: "Explore Clubs, Attend Events",
+    text: "Join events, connect with members, and grow your personal and professional network.",
+    image:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80",
+    primary: "Explore Events",
+    primaryLink: "/events",
+    secondary: "Get Started",
+    secondaryLink: "/register",
+    stat: "300+ Events",
+  },
+];
+
 const HeroSlider = () => {
   return (
-    <section className="bg-base-200 py-8">
-      {/* ✅ CENTER WRAPPER */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        
-        {/* ✅ HERO CARD */}
-        <div className="carousel w-full rounded-3xl overflow-hidden shadow-2xl">
+    <section className="relative bg-gradient-to-br from-base-200 via-base-100 to-primary/10 py-6 md:py-10 overflow-hidden">
+      <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl"></div>
+      <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/20 blur-3xl"></div>
 
-          {/* Slide 1 */}
-          <div
-            id="slide1"
-            className="carousel-item relative w-full min-h-[500px] md:min-h-[600px]"
-          >
+      <div className="w-full px-4 md:px-8 lg:px-12">
+        <div className="carousel w-full rounded-[2rem] overflow-hidden shadow-2xl border border-white/20">
+          {slides.map((slide) => (
             <div
-              className="w-full bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=80')",
-              }}
+              key={slide.id}
+              id={slide.id}
+              className="carousel-item relative w-full min-h-[560px] md:min-h-[680px]"
             >
-              <div className="w-full h-full bg-gradient-to-r from-black/70 via-black/40 to-black/70 flex items-center">
-                <div className="max-w-2xl px-6 md:px-12 text-white">
-                  <span className="inline-block px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium mb-4">
-                    Welcome to ClubSphere
-                  </span>
+              <div
+                className="relative w-full bg-cover bg-center"
+                style={{ backgroundImage: `url('${slide.image}')` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/20"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.18),transparent_28%)]"></div>
 
-                  <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
-                    Discover Local Clubs <br /> Build Real Connections
-                  </h1>
+                <div className="relative z-10 flex min-h-[560px] md:min-h-[680px] items-center px-6 md:px-14 lg:px-20">
+                  <div className="max-w-3xl text-white">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-5 py-2 text-sm font-semibold backdrop-blur-md shadow-lg">
+                      <span className="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                      {slide.badge}
+                    </span>
 
-                  <p className="text-base md:text-lg text-white/85 mb-8">
-                    Join photography, tech, hiking, book, and social clubs near
-                    you. Explore communities, attend events, and grow your
-                    network.
-                  </p>
+                    <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight">
+                      {slide.title}
+                    </h1>
 
-                  <div className="flex flex-wrap gap-4">
-                    <Link to="/clubs" className="btn btn-primary rounded-full px-8">
-                      Explore Clubs
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="btn btn-outline text-white border-white hover:bg-white hover:text-black rounded-full px-8"
-                    >
-                      Join Now
-                    </Link>
+                    <p className="mt-6 max-w-2xl text-base md:text-xl text-white/85 leading-relaxed">
+                      {slide.text}
+                    </p>
+
+                    <div className="mt-9 flex flex-wrap gap-4">
+                      <Link
+                        to={slide.primaryLink}
+                        className="btn btn-primary rounded-full px-8 shadow-lg shadow-primary/30"
+                      >
+                        {slide.primary}
+                      </Link>
+
+                      <Link
+                        to={slide.secondaryLink}
+                        className="btn rounded-full border-white/40 bg-white/10 px-8 text-white backdrop-blur-md hover:bg-white hover:text-black"
+                      >
+                        {slide.secondary}
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="hidden lg:block absolute right-14 bottom-16 w-72 rounded-3xl border border-white/20 bg-white/15 p-5 text-white backdrop-blur-xl shadow-2xl">
+                    <p className="text-sm text-white/70">ClubSphere Highlight</p>
+                    <h3 className="mt-2 text-3xl font-black">{slide.stat}</h3>
+                    <p className="mt-2 text-sm text-white/80">
+                      Active communities waiting for new members like you.
+                    </p>
+                  </div>
+
+                  <div className="hidden md:flex absolute right-20 top-16 h-24 w-24 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md">
+                    <span className="text-3xl">✦</span>
+                  </div>
+
+                  <div className="absolute left-8 bottom-8 hidden md:flex gap-2">
+                    {slides.map((item) => (
+                      <a
+                        key={item.id}
+                        href={`#${item.id}`}
+                        className={`h-2 rounded-full bg-white/70 ${
+                          item.id === slide.id ? "w-10" : "w-2"
+                        }`}
+                      ></a>
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Buttons */}
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 justify-between">
-              <a href="#slide3" className="btn btn-circle bg-white/80 border-none">
-                ❮
-              </a>
-              <a href="#slide2" className="btn btn-circle bg-white/80 border-none">
-                ❯
-              </a>
-            </div>
-          </div>
-
-          {/* Slide 2 */}
-          <div
-            id="slide2"
-            className="carousel-item relative w-full min-h-[500px] md:min-h-[600px]"
-          >
-            <div
-              className="w-full bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1400&q=80')",
-              }}
-            >
-              <div className="w-full h-full bg-gradient-to-r from-black/70 via-black/40 to-black/70 flex items-center">
-                <div className="max-w-2xl px-6 md:px-12 text-white">
-                  <span className="inline-block px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium mb-4">
-                    Join Amazing Communities
-                  </span>
-
-                  <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
-                    Meet People Who Share <br /> Your Passion
-                  </h1>
-
-                  <p className="text-base md:text-lg text-white/85 mb-8">
-                    Find your perfect community and grow together with people
-                    who share your interests.
-                  </p>
-
-                  <div className="flex flex-wrap gap-4">
-                    <Link to="/clubs" className="btn btn-primary rounded-full px-8">
-                      View Clubs
-                    </Link>
-                    <Link
-                      to="/how-it-works"
-                      className="btn btn-outline text-white border-white hover:bg-white hover:text-black rounded-full px-8"
-                    >
-                      How It Works
-                    </Link>
-                  </div>
-                </div>
+              <div className="absolute left-4 right-4 top-1/2 z-20 flex -translate-y-1/2 justify-between md:left-8 md:right-8">
+                <a
+                  href={`#${slide.prev}`}
+                  className="btn btn-circle border-white/20 bg-white/20 text-white backdrop-blur-md hover:bg-white hover:text-black"
+                >
+                  ❮
+                </a>
+                <a
+                  href={`#${slide.next}`}
+                  className="btn btn-circle border-white/20 bg-white/20 text-white backdrop-blur-md hover:bg-white hover:text-black"
+                >
+                  ❯
+                </a>
               </div>
             </div>
-
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 justify-between">
-              <a href="#slide1" className="btn btn-circle bg-white/80 border-none">
-                ❮
-              </a>
-              <a href="#slide3" className="btn btn-circle bg-white/80 border-none">
-                ❯
-              </a>
-            </div>
-          </div>
-
-          {/* Slide 3 */}
-          <div
-            id="slide3"
-            className="carousel-item relative w-full min-h-[500px] md:min-h-[600px]"
-          >
-            <div
-              className="w-full bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80')",
-              }}
-            >
-              <div className="w-full h-full bg-gradient-to-r from-black/70 via-black/40 to-black/70 flex items-center">
-                <div className="max-w-2xl px-6 md:px-12 text-white">
-                  <span className="inline-block px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium mb-4">
-                    Events • Community • Growth
-                  </span>
-
-                  <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
-                    Explore Clubs, <br /> Attend Events
-                  </h1>
-
-                  <p className="text-base md:text-lg text-white/85 mb-8">
-                    Join events, connect with members, and grow your personal and
-                    professional network.
-                  </p>
-
-                  <div className="flex flex-wrap gap-4">
-                    <Link to="/events" className="btn btn-primary rounded-full px-8">
-                      Explore Events
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="btn btn-outline text-white border-white hover:bg-white hover:text-black rounded-full px-8"
-                    >
-                      Get Started
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 justify-between">
-              <a href="#slide2" className="btn btn-circle bg-white/80 border-none">
-                ❮
-              </a>
-              <a href="#slide1" className="btn btn-circle bg-white/80 border-none">
-                ❯
-              </a>
-            </div>
-          </div>
-
+          ))}
         </div>
       </div>
     </section>
