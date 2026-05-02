@@ -1,6 +1,7 @@
 import React from 'react';
 // import Hero from './Hero';
-import Categories from './categories';
+// import Categories from './categories';
+import Categories from "./Categories";
 import FeaturedClubs from './FeaturedClubs';
 import HeroSlider from '../components/HeroSlider';
 import Reviews from './Reviews/Reviews';
