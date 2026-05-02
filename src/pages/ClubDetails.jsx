@@ -5,6 +5,7 @@ import { use } from "react";
 import { AuthContext } from "../Authprovider/AuthProvider";
 import Swal from "sweetalert2";
 import { checkMembership, createMembership } from "../api/memberships";
+import { baseURL } from "../api/baseURL";
 
 const ClubDetails = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const ClubDetails = () => {
   const { data: club, isLoading, isError } = useQuery({
     queryKey: ["clubDetails", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/clubs/${id}`);
+      const res = await axios.get(`${baseURL}/clubs/${id}`);
       return res.data;
     },
   });

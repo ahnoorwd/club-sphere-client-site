@@ -4,6 +4,7 @@ import axios from "axios";
 import CheckoutForm from "../components/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { baseURL } from "../api/baseURL";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -13,7 +14,7 @@ const PaymentPage = () => {
   const { data: club, isLoading, isError } = useQuery({
     queryKey: ["paymentClub", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/clubs/${id}`);
+      const res = await axios.get(`${baseURL}/clubs/${id}`);
       return res.data;
     },
   });

@@ -15,6 +15,19 @@ import DashboardHome from "../pages/dashboard/DashboardHome";
 import AddClub from "../pages/dashboard/AddClub";
 import ManageClubs from "../pages/dashboard/ManageClubs";
 import ManageAllClubs from "../pages/dashboard/ManageAllClubs";
+import Events from "../pages/Events";
+import EventDetails from "../pages/EventDetails";
+import CreateEvent from "../pages/dashboard/CreateEvent";
+import ManageEvents from "../pages/dashboard/ManageEvents";
+import UpdateEvent from "../pages/dashboard/UpdateEvent";
+import MyEvents from "../pages/dashboard/MyEvents";
+import EventPaymentPage from "../pages/EventPaymentPage";
+import ManageUsers from "../pages/dashboard/ManageUsers";
+import Profile from "../pages/Profile";
+import AnalyticsDashboard from "../pages/dashboard/AnalyticsDashboard";
+import HowItWorks from "../pages/HowItWorks";
+import AboutUs from "../pages/AboutUs";
+import CommunityLeaders from "../pages/dashboard/CommunityLeaders";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +47,18 @@ export const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
+        path: "/howitworks",
+        element: <HowItWorks></HowItWorks>,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/profile",
+        element: <Profile></Profile>,
+      },
+      {
         path: "/clubs",
         element: <Clubs></Clubs>,
       },
@@ -41,6 +66,20 @@ export const router = createBrowserRouter([
         path: "/clubs/:id",
         element: <ClubDetails></ClubDetails>,
       },
+      {
+        path: "/events",
+        element: <Events></Events>,
+      },
+      {
+        path: "/events/:id",
+        element: <EventDetails></EventDetails>,
+      },
+
+      {
+        path: "/event-payment/:id",
+        element: <EventPaymentPage></EventPaymentPage>,
+      },
+
       {
         path: "/payment/:id",
         element: <PaymentPage></PaymentPage>,
@@ -63,6 +102,14 @@ export const router = createBrowserRouter([
             element: <MyClubs></MyClubs>,
           },
           {
+            path: "community-leaders",
+            element: <CommunityLeaders />,
+          },
+          {
+            path: "my-events",
+            element: <MyEvents></MyEvents>,
+          },
+          {
             path: "payment-history",
             element: <PaymentHistory></PaymentHistory>,
           },
@@ -77,6 +124,26 @@ export const router = createBrowserRouter([
           {
             path: "manage-all-clubs",
             element: <ManageAllClubs></ManageAllClubs>,
+          },
+          {
+            path: "manage-users",
+            element: <ManageUsers></ManageUsers>,
+          },
+          {
+            path: "create-event",
+            element: <CreateEvent></CreateEvent>,
+          },
+          {
+            path: "manage-events",
+            element: <ManageEvents></ManageEvents>,
+          },
+          {
+            path: "update-event/:id",
+            element: <UpdateEvent></UpdateEvent>,
+          },
+          {
+            path: "analytics",
+            element: <AnalyticsDashboard></AnalyticsDashboard>,
           },
         ],
       },

@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router";
+import { FaChartPie, FaUserTie } from "react-icons/fa";
 import useUserRole from "../hooks/useUserRole";
 import {
   FaHome,
@@ -31,7 +32,11 @@ const DashboardLayout = () => {
   return (
     <div className="min-h-screen bg-slate-100">
       <div className="drawer lg:drawer-open">
-        <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
+        <input
+          id="dashboard-drawer"
+          type="checkbox"
+          className="drawer-toggle"
+        />
 
         {/* Main content */}
         <div className="drawer-content flex flex-col">
@@ -100,9 +105,25 @@ const DashboardLayout = () => {
                     <span>My Clubs</span>
                   </NavLink>
 
-                  <NavLink to="/dashboard/payment-history" className={linkClass}>
+                  <NavLink to="/dashboard/my-events" className={linkClass}>
+                    <FaClipboardList className="text-lg" />
+                    <span>My Events</span>
+                  </NavLink>
+
+                  <NavLink
+                    to="/dashboard/payment-history"
+                    className={linkClass}
+                  >
                     <FaMoneyBillWave className="text-lg" />
                     <span>Payment History</span>
+                  </NavLink>
+
+                  <NavLink
+                    to="/dashboard/community-leaders"
+                    className={linkClass}
+                  >
+                    <FaUserTie className="text-lg" />
+                    <span>Community Leaders</span>
                   </NavLink>
                 </>
               )}
@@ -119,18 +140,35 @@ const DashboardLayout = () => {
                     <FaClipboardList className="text-lg" />
                     <span>Manage Clubs</span>
                   </NavLink>
+
+                  <NavLink to="/dashboard/create-event" className={linkClass}>
+                    <FaPlusCircle className="text-lg" />
+                    <span>Create Event</span>
+                  </NavLink>
+                  <NavLink to="/dashboard/manage-events" className={linkClass}>
+                    <FaClipboardList className="text-lg" />
+                    <span>Manage Events</span>
+                  </NavLink>
                 </>
               )}
 
               {/* Admin links */}
               {role === "admin" && (
                 <>
+                  <NavLink to="/dashboard/analytics" className={linkClass}>
+                    <FaChartPie className="text-lg" />
+                    <span>Analytics</span>
+                  </NavLink>
+
                   <NavLink to="/dashboard/manage-users" className={linkClass}>
                     <FaUsers className="text-lg" />
                     <span>Manage Users</span>
                   </NavLink>
 
-                  <NavLink to="/dashboard/manage-all-clubs" className={linkClass}>
+                  <NavLink
+                    to="/dashboard/manage-all-clubs"
+                    className={linkClass}
+                  >
                     <FaClipboardList className="text-lg" />
                     <span>Manage Clubs</span>
                   </NavLink>
