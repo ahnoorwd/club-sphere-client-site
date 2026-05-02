@@ -1,28 +1,29 @@
 import axios from "axios";
+import { baseURL } from "./baseURL";
 
 export const checkMembership = async (email, clubId) => {
   const res = await axios.get(
-    `http://localhost:5000/memberships/check?email=${email}&clubId=${clubId}`
+    `${baseURL}/memberships/check?email=${email}&clubId=${clubId}`
   );
   return res.data;
 };
 
 export const createMembership = async (membershipInfo) => {
   const res = await axios.post(
-    "http://localhost:5000/memberships",
+    `${baseURL}/memberships`,
     membershipInfo
   );
   return res.data;
 };
 
 export const getUserMemberships = async (email) => {
-  const res = await axios.get(`http://localhost:5000/memberships/user/${email}`);
+  const res = await axios.get(`${baseURL}/memberships/user/${email}`);
   return res.data;
 };
 
 export const leaveClub = async (membershipId) => {
   const res = await axios.delete(
-    `http://localhost:5000/memberships/${membershipId}`
+    `${baseURL}/memberships/${membershipId}`
   );
   return res.data;
 };
@@ -30,7 +31,7 @@ export const leaveClub = async (membershipId) => {
 // 30||04||26
 
 export const getUpcomingEvents = async () => {
-  const res = await axios.get("http://localhost:5000/events");
+  const res = await axios.get(`${baseURL}/events`);
   
   // sort upcoming events
   const events = res.data;

@@ -1,22 +1,24 @@
 import axios from "axios";
+import { baseURL } from "./baseURL";
 
 export const createClub = async (clubInfo) => {
-  const res = await axios.post("http://localhost:5000/clubs", clubInfo);
+  
+  const res = await axios.post(`${baseURL}/clubs`, clubInfo);
   return res.data;
 };
 
 export const getManagerClubs = async (email) => {
-  const res = await axios.get(`http://localhost:5000/clubs?email=${email}`);
+  const res = await axios.get(`${baseURL}/clubs?email=${email}`);
   return res.data;
 };
 
 export const getAllClubs = async () => {
-  const res = await axios.get("http://localhost:5000/clubs");
+  const res = await axios.get(`${baseURL}/clubs`);
   return res.data;
 };
 
 export const updateClubStatus = async (id, status) => {
-  const res = await axios.patch(`http://localhost:5000/clubs/status/${id}`, {
+  const res = await axios.patch(`${baseURL}/clubs/status/${id}`, {
     status,
   });
   return res.data;

@@ -1,6 +1,8 @@
 import axios from "axios";
+import { baseURL } from "./baseURL";
 
 export const getAdminAnalytics = async () => {
-  const res = await axios.get("http://localhost:5000/admin/analytics");
+  
+  const res = await axios.get(`${baseURL}/admin/analytics`);
   return res.data;
 };
