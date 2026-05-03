@@ -1,56 +1,105 @@
 # 🌐 ClubSphere – Frontend
 
-Welcome to **ClubSphere**, a modern web platform where users can explore, join, and engage with different local clubs.  
-This frontend application is built with React and provides a smooth, responsive, and user-friendly experience.
+Welcome to **ClubSphere**, a modern and scalable community platform where users can explore, join, and interact with local clubs seamlessly.
 
-This frontend application is built with React and provides a smooth, responsive, and user-friendly experience.
+Built with **React + Tailwind + Firebase + JWT + Stripe**, this platform delivers a smooth, secure, and premium user experience.
 
 ---
 
 ## 🚀 Live Website
 
-🔗 **[View Live Site](#)** *(Add your deployed link here later)*
+🔗 **[https://clubsphere-appp.netlify.app/](#)  
+
+
+## 🔐 Test Credentials (For Evaluation)
+
+## 👤 Admin Access
+
+Email: admin@gmail.com
+Password: adminADMIN!@#
+
+##  🧑‍💼 Club Manager
+
+Email: manager@gmail.com
+Password: MANAGERmanager!@#
+
 
 ---
 
+
+
+
 ## 🎯 Project Purpose
 
-ClubSphere helps users:
-- Discover clubs based on their interests  
-- View detailed club information  
-- Join clubs easily  
-- Become part of a growing community  
+ClubSphere is designed to:
+
+- 🌍 Connect people through shared interests  
+- 🏢 Help users discover and join local communities  
+- 🎯 Provide structured club management system  
+- 💳 Enable secure paid membership using Stripe  
+- 🔐 Ensure safe and role-based access using JWT  
 
 ---
 
 ## ✨ Key Features
 
 ### 🔹 Public Features
-- 🏠 Modern Home page with Hero Section  
-- ⭐ Featured clubs (latest approved clubs)  
-- 📚 All clubs page (dynamic data from MongoDB)  
-- 🔍 Club details page  
+- 🏠 Premium Home Page with Hero Slider  
+- ⭐ Featured Clubs (latest approved clubs)  
+- 📚 All Clubs Page with search & filtering  
+- 🔍 Detailed Club Information Page  
+- 🧭 “ClubSphere Journey” section (user flow visualization)
 
-### 🔹 Authentication
-- 🔐 Email & Password login/register (Firebase)  
-- 🔑 Google Sign-in  
-- 👤 User data stored in MongoDB  
+---
 
-### 🔹 Club Interaction
-- ✅ Join club functionality (free clubs)  
+### 🔹 Authentication & Security
+- 🔐 Firebase Authentication (Email/Password + Google Login)  
+- 🛡️ JWT Token-based secure API communication  
+- 🔒 Protected Routes (Private & Role-based)  
+- 👤 User data stored securely in MongoDB  
+
+---
+
+### 🔹 Membership System
+- ✅ Join free clubs with modal form (formal process UI)  
+- 💳 Paid club membership with Stripe Payment Integration  
 - 🚫 Prevent duplicate joining  
-- 🔄 Login required before joining  
+- 📊 Membership tracking system  
 
-### 🔹 UI/UX
+---
+
+### 🔹 Dashboard Features
+
+#### 👤 User Dashboard
+- 📌 Joined Clubs  
+- 📅 My Events  
+- 💰 Payment History  
+
+#### 🧑‍💼 Club Manager
+- ➕ Add Club  
+- 📊 Manage Own Clubs  
+- 📍 Track approval status  
+
+#### 🛠️ Admin Panel
+- 📋 Manage All Clubs  
+- ✅ Approve / Reject Clubs  
+- 📊 Full system control  
+
+---
+
+### 🔹 Payment Integration
+- 💳 Stripe Payment Gateway  
+- 🔐 Secure transaction handling  
+- 📜 Payment history tracking  
+
+---
+
+### 🔹 UI/UX Highlights
 - 🎨 Fully responsive design  
-- 🌟 Modern card layout  
-- 🔥 Hero slider section  
-- 🔔 Toast notifications & alerts  
-
-  Join club functionality (free clubs)  
-- 🚫 Prevent duplicate joining  
-- 🔄 Login required before joining  
-
+- 🌈 Modern gradient-based UI  
+- 💎 Premium card & layout system  
+- ⚡ Smooth animations & transitions  
+- 🔔 Toast + SweetAlert feedback system  
 
 ---
 
@@ -68,6 +117,12 @@ ClubSphere helps users:
 
 ### Authentication
 - 🔐 Firebase  
+
+### Backend (Connected)
+- 🧠 Node.js + Express  
+- 🍃 MongoDB  
+- 🔑 JWT Authentication  
+- 💳 Stripe API  
 
 ### UI Libraries
 - 🔔 React Toastify  
