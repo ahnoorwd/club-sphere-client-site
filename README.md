@@ -8,7 +8,7 @@ Built with **React + Tailwind + Firebase + JWT + Stripe**, this platform deliver
 
 ## 🚀 Live Website
 
-🔗 **[https://clubsphere-appp.netlify.app/](#)  
+🔗 [https://clubsphereee.netlify.app/](#)  
 
 
 ## 🔐 Test Credentials (For Evaluation)
@@ -23,12 +23,83 @@ Password: adminADMIN!@#
 Email: manager@gmail.com
 Password: MANAGERmanager!@#
 
+##  For Free Stripe Payment Check
+card Number : 4242 4242 4242 4242 
+MM/YY : 02/44 etc 
+CVC : 123
+ZIP : 12345
 
 ---
 
 
+## Project Structure  
+club-sphere-client-site/
+├── public/
+│   ├── _redirects
+│   └── reviews.json
+├── src/
+│   ├── api/
+│   │   ├── analytics.js
+│   │   ├── baseURL.js
+│   │   ├── clubs.js
+│   │   ├── dashboard.js
+│   │   ├── events.js
+│   │   ├── memberships.js
+│   │   ├── payments.js
+│   │   └── users.js
+│   ├── assets/
+│   ├── Authprovider/
+│   │   └── AuthProvider.jsx
+│   ├── components/
+│   │   ├── HeroSlider.jsx
+│   │   └── home/
+│   │       └── UpcomingEvents.jsx
+│   ├── firebase/
+│   │   └── firebase.config.js
+│   ├── layouts/
+│   │   ├── DashboardLayout.jsx
+│   │   └── MainLayout.jsx
+│   ├── pages/
+│   │   ├── AboutUs.jsx
+│   │   ├── AddClub.jsx
+│   │   ├── Analytics.jsx
+│   │   ├── Categories.jsx
+│   │   ├── ClubDetails.jsx
+│   │   ├── Clubs.jsx
+│   │   ├── CommunityLeaders.jsx
+│   │   ├── DashboardHome.jsx
+│   │   ├── EventDetails.jsx
+│   │   ├── EventPaymentPage.jsx
+│   │   ├── Events.jsx
+│   │   ├── FeaturedClubs.jsx
+│   │   ├── Home.jsx
+│   │   ├── Login.jsx
+│   │   ├── ManageClubs.jsx
+│   │   ├── ManageEvents.jsx
+│   │   ├── ManageUsers.jsx
+│   │   ├── MyClubs.jsx
+│   │   ├── MyEvents.jsx
+│   │   ├── PaymentHistory.jsx
+│   │   ├── PlatformStats.jsx
+│   │   ├── Profile.jsx
+│   │   ├── Register.jsx
+│   │   └── Reviews/
+│   │       ├── Reviews.jsx
+│   │       └── ReviewsCard.jsx
+│   ├── Routes/
+│   │   └── Routes.jsx
+│   ├── shared/
+│   │   ├── Footer.jsx
+│   │   └── Navbar.jsx
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .env.local
+├── index.html
+├── package.json
+└── vite.config.js
 
-
+---
 ## 🎯 Project Purpose
 
 ClubSphere is designed to:
