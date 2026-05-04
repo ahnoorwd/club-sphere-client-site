@@ -8,7 +8,7 @@ Built with **React + Tailwind + Firebase + JWT + Stripe**, this platform deliver
 
 ## 🚀 Live Website
 
-🔗 **[https://clubsphere-appp.netlify.app/](#)  
+🔗 [https://clubsphereee.netlify.app/](#)  
 
 
 ## 🔐 Test Credentials (For Evaluation)
@@ -23,12 +23,13 @@ Password: adminADMIN!@#
 Email: manager@gmail.com
 Password: MANAGERmanager!@#
 
+##  For Free Stripe Payment Check
+card Number : 4242 4242 4242 4242 
+MM/YY : 02/44 etc 
+CVC : 123
+ZIP : 12345
 
 ---
-
-
-
-
 ## 🎯 Project Purpose
 
 ClubSphere is designed to:
